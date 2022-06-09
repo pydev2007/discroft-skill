@@ -1,21 +1,16 @@
-# <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/rss.svg" card_color="#1870D5" width="50" height="50" style="vertical-align:bottom"/> Discroft
-Mycroft discord bot
+# <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/discord.svg" card_color="#00FF00" width="50" height="50" style="vertical-align:bottom"/> Discroft
+Simple mycroft discord bot.
 
 ## About
-
-
-## Examples
+This mycroft discord bot will allow you to reach mycroft through discord! you can do this without opening your port!
 
 ## Credits
 Gavin Thompson
 
 ## Category
-**Daily**
-Information
-IoT
-Productivity
+**IoT**
 
 ## Tags
 #Discord
-#Bot
+#Portable
 
