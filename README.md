@@ -14,3 +14,8 @@ Gavin Thompson
 #Discord
 #Portable
 
+## Get Started
+
+First, you need to create a bot. You can do this in the [Discord Developer Portal](https://discord.com/developers/applications). Click "New Application" and give your bot a name. 
+
+![Mycroft_gif_1](https://user-images.githubusercontent.com/80983612/173093969-2fa17a71-08dd-4e80-bfbb-192541044637.gif)
