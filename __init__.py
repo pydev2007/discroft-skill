@@ -30,28 +30,28 @@ class discroft(MycroftSkill):
     def initialize(self):
         TOKEN = self.settings.get("Token")
         self.URL = self.settings.get("Url")
-        
-        self.DiscordHook = Webhook.from_url(self.URL, adapter=RequestsWebhookAdapter()) 
-        self.discord_bot(TOKEN)
-        self.client = MessageBusClient()
-        self.client.on('speak', self.sndmsg) #On message send message run sndmsg() which sends the message to discord
-        self.client.run_in_thread()
 
-    def on_settings_changed(self):
-        TOKEN = self.settings.get("Token")
-        self.URL = self.settings.get("Url")
-
-        if TOKEN == None:
-            LOG.warning("You need to add a token")
-
-        if self.URL == None:
-            LOG.warning("You need to add a Webhook Url")
+        if TOKEN is "" or self.URL is "":
+            LOG.error("Token or URL may be incorrect")
 
         else:
             self.discord_bot(TOKEN)
             self.client = MessageBusClient()
             self.client.on('speak', self.sndmsg) #On message send message run sndmsg() which sends the message to discord
-            self.client.run_forever()
+            self.client.run_in_thread()
+
+    def on_settings_changed(self):
+        TOKEN = self.settings.get("Token")
+        self.URL = self.settings.get("Url")
+
+        if TOKEN is "" or self.URL is "":
+            LOG.error("Token or URL may be incorrect")
+
+        else:
+            self.discord_bot(TOKEN)
+            self.client = MessageBusClient()
+            self.client.on('speak', self.sndmsg) #On message send message run sndmsg() which sends the message to discord
+            self.client.run_in_thread()
 
         
 
