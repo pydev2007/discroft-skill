@@ -32,32 +32,20 @@ class discroft(MycroftSkill):
         self.URL = self.settings.get("Url")
 
         if TOKEN is "" or self.URL is "":
-            LOG.error("Token or URL may be incorrect")
+            LOG.error("Token or URL is empty")
 
         else:
+            # On message send message run sndmsg() which sends the message to discord
             self.discord_bot(TOKEN)
             self.client = MessageBusClient()
-            self.client.on('speak', self.sndmsg) #On message send message run sndmsg() which sends the message to discord
+            self.client.on('speak', self.sndmsg) 
             self.client.run_in_thread()
 
-    def on_settings_changed(self):
-        TOKEN = self.settings.get("Token")
-        self.URL = self.settings.get("Url")
-
-        if TOKEN is "" or self.URL is "":
-            LOG.error("Token or URL may be incorrect")
-
-        else:
-            self.discord_bot(TOKEN)
-            self.client = MessageBusClient()
-            self.client.on('speak', self.sndmsg) #On message send message run sndmsg() which sends the message to discord
-            self.client.run_in_thread()
-
-        
 
     def discord_bot(self, TOKEN):
+        # Commands and starting the bot
         loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop) #Fixes event in discord.py
+        asyncio.set_event_loop(loop) 
         bot = commands.Bot(command_prefix="!")
 
         @bot.event
@@ -66,16 +54,17 @@ class discroft(MycroftSkill):
             
         @bot.command(name='send', help='Sends command to mycroft')
         async def command(ctx, *, commands):
-            self.bus.emit(Message('recognizer_loop:utterance',{"utterances": [commands],"lang": self.lang})) #Sends command to Mycroft
+            self.bus.emit(Message('recognizer_loop:utterance',{"utterances": [commands],"lang": self.lang}))
 
         self.loop = asyncio.get_event_loop()
         loop.create_task(bot.start(TOKEN))
-        Thread(target=loop.run_forever).start() # Runs bot in thread
+        Thread(target=loop.run_forever).start()
 
     def sndmsg(self, message):
+        # Sends messages through the webhook when Mycroft speaks
         self.DiscordHook = Webhook.from_url(self.URL, adapter=RequestsWebhookAdapter()) 
-        data = message.data.get("utterance") # Grabs response and does a barrel roll 
-        self.DiscordHook.send(data) # Sends message through the webhook
+        data = message.data.get("utterance")  
+        self.DiscordHook.send(data) 
         LOG.info("Sending message to Discord")
 
 def create_skill():
