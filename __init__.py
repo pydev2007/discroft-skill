@@ -31,15 +31,23 @@ class discroft(MycroftSkill):
         TOKEN = self.settings.get("Token")
         self.URL = self.settings.get("Url")
 
-        if TOKEN is "" or self.URL is "":
-            LOG.error("Token or URL is empty")
+        LOG.error(self.URL)
+
+        self.discord_bot(TOKEN)
+
+        if self.URL == "":
+            LOG.error("URL is empty")
 
         else:
-            # On message send message run sndmsg() which sends the message to discord
-            self.discord_bot(TOKEN)
-            self.client = MessageBusClient()
-            self.client.on('speak', self.sndmsg) 
-            self.client.run_in_thread()
+            webtest = requests.get(self.URL)
+
+            if webtest.status_code == 200:
+                self.client = MessageBusClient()
+                self.client.on('speak', self.sndmsg) 
+                self.client.run_in_thread()
+            
+            else:
+                LOG.error("Invalid URL please make sure the URL and the token is valid")
 
 
     def discord_bot(self, TOKEN):
