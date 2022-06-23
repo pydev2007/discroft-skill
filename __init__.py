@@ -31,21 +31,23 @@ class discroft(MycroftSkill):
         TOKEN = self.settings.get("Token")
         self.URL = self.settings.get("Url")
 
+        self.discord_bot(TOKEN)
+
+
         try:
-            self.discord_bot(TOKEN)
-
+            webtest = requests.get(self.URL)
+            if webtest.status_code == 200:
+                self.client = MessageBusClient()
+                self.client.on('speak', self.sndmsg) 
+                self.client.run_in_thread()
+        
+            else:
+                LOG.error("Invalid URL please make sure the URL and the token is valid")
+                
         except:
-            LOG.error("Bot failed to boot up, is the token correct?")
+            LOG.error("Could not connect to the URL")
 
-        webtest = requests.get(self.URL)
-        
-        if webtest.status_code == 200:
-            self.client = MessageBusClient()
-            self.client.on('speak', self.sndmsg) 
-            self.client.run_in_thread()
-        
-        else:
-            LOG.error("Invalid URL please make sure the URL and the token is valid")
+
 
 
     def discord_bot(self, TOKEN):
@@ -63,8 +65,8 @@ class discroft(MycroftSkill):
             self.bus.emit(Message('recognizer_loop:utterance',{"utterances": [commands],"lang": self.lang}))
 
         self.loop = asyncio.get_event_loop()
-        loop.create_task(bot.start(TOKEN))
-        Thread(target=loop.run_forever).start()
+        self.loop.create_task(bot.start(TOKEN))
+        Thread(target=self.loop.run_forever).start()
 
     def sndmsg(self, message):
         # Sends messages through the webhook when Mycroft speaks
