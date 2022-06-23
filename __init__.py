@@ -33,7 +33,6 @@ class discroft(MycroftSkill):
 
         self.discord_bot(TOKEN)
 
-
         try:
             webtest = requests.get(self.URL)
             if webtest.status_code == 200:
@@ -46,9 +45,6 @@ class discroft(MycroftSkill):
                 
         except:
             LOG.error("Could not connect to the URL")
-
-
-
 
     def discord_bot(self, TOKEN):
         # Commands and starting the bot
