@@ -15,6 +15,7 @@
 
 from mycroft import MycroftSkill, intent_file_handler
 from mycroft.util.log import LOG
+from mycroft_bus_client import MessageBusClient, Message
 import asyncio
 from threading import Thread
 import requests
