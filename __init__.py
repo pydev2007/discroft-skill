@@ -14,7 +14,6 @@
 
 
 from mycroft import MycroftSkill, intent_file_handler
-from mycroft_bus_client import MessageBusClient, Message
 from mycroft.util.log import LOG
 import asyncio
 from threading import Thread
@@ -36,10 +35,8 @@ class discroft(MycroftSkill):
         try:
             webtest = requests.get(self.URL)
             if webtest.status_code == 200:
-                self.client = MessageBusClient()
-                self.client.on('speak', self.sndmsg) 
-                self.client.run_in_thread()
-        
+                self.add_event('speak', self.sndmsg) 
+
             else:
                 LOG.error("Invalid URL please make sure the URL and the token is valid")
                 
