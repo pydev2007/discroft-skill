@@ -25,6 +25,8 @@ Gavin Thompson
 mycroft-msm install https://github.com/pydev2007/discroft-skill.git
 ```
 
+Use git if Mycroft is having trouble installing or if prefered
+
 ### Git clone
 Clone the skill and install the requirements.txt
 ```
