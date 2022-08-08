@@ -1,3 +1,7 @@
+[![Generic badge](https://img.shields.io/pypi/v/discord.py.svg)](https://pypi.org/project/discord.py/)
+[![Generic badge](https://img.shields.io/pypi/pyversions/discord.py.svg)](https://github.com/Rapptz/discord.py)
+
+
 # <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/rss.svg" card_color="#7289da" width="50" height="50" style="vertical-align:bottom"/> Discroft
 Simple mycroft discord bot.
 
@@ -14,7 +18,24 @@ Gavin Thompson
 #Discord
 #Portable
 
+## Installation methods
+
+### Mycroft msm (Easiest)
+```
+mycroft-msm install https://github.com/pydev2007/discroft-skill.git
+```
+
+### Git clone
+Clone the skill and install the requirements.txt
+```
+git clone https://github.com/pydev2007/discroft-skill.git
+```
+```
+pip3 install requirements.txt -r
+```
 ## Get Started
+
+**Discord requires Python 3.5 or higher**
 
 First, you need to create an application. You can do this in the [Discord Developer Portal](https://discord.com/developers/applications). Click "New Application" and give your app a name. 
 
